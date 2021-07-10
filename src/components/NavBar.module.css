@@ -1,0 +1,4 @@
+.navbar_wrap {
+    grid-area: n;
+    box-sizing: border-box;
+}

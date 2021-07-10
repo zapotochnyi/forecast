@@ -1,0 +1,4 @@
+.forecast_wrap {
+    grid-area: p;
+    background-color: purple;
+}
