@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
-import ForecastContainer from "./components/ForecastContainer/ForecastContainer";
+import Forecast from "./components/ForecastContainer/Forecast";
 import { connect } from "react-redux";
 import Loader from "./components/common/Loader";
+import { getForecastDataByGeoCoordinates } from "./redux/forecastReducer";
 
-const App = ({ initialized }) => {
+const App = ({ getForecastDataByGeoCoordinates, forecastData }) => {
+  let [isLoader, setIsLoader] = useState(true);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((data) => {
+      getForecastDataByGeoCoordinates(
+        data.coords.latitude,
+        data.coords.longitude
+      ).then(() => setIsLoader(false));
+    });
+  }, []);
+
   return (
     <>
-      {!initialized ? (
+      {isLoader ? (
         <Loader />
       ) : (
         <div className="app-wrapper">
           <Header />
           <NavBar />
-          <ForecastContainer />
+          <Forecast forecastData={forecastData} />
         </div>
       )}
     </>
@@ -24,8 +36,10 @@ const App = ({ initialized }) => {
 
 const mapStateToProps = (state) => {
   return {
-    initialized: state.forecast.initialized,
+    forecastData: state.forecast.forecastData,
   };
 };
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, { getForecastDataByGeoCoordinates })(
+  App
+);
