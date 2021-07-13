@@ -17,7 +17,7 @@ const App = ({ getForecastDataByGeoCoordinates, forecastData }) => {
         data.coords.longitude
       ).then(() => setIsLoader(false));
     });
-  }, []);
+  }, [getForecastDataByGeoCoordinates]);
 
   return (
     <>

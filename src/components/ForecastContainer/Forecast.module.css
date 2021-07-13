@@ -1,4 +1,5 @@
 .forecast_wrap {
     grid-area: p;
-    background-color: purple;
+    background-color: rgb(44, 23, 56);
+    border-top-left-radius: 20px;
 }

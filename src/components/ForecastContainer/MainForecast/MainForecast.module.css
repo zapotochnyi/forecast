@@ -1,3 +1,33 @@
 .main_forecast_wrap {
-    background-color: aquamarine;
+    display: flex;
+    justify-content: space-between;
+}
+
+.temp_description_wrap {
+    padding-left: 50px;
+    color: whitesmoke;
+}
+
+.temp {
+    font-size: 80px;
+    letter-spacing: 0.01em;
+}
+
+.description {
+    display: flex;
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+.description :first-child {
+    margin-right: 5px;
+}
+
+.icon_wrap {
+    position: relative;
+    bottom: 100px;
+}
+
+.icon_wrap img {
+    width: 400px;
 }
