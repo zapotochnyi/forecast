@@ -47,7 +47,7 @@ const MainForecast = ({ weather: { description, main }, temp, feels_like }) => {
         <div className={s.temp}>{Math.round(temp)}°C</div>
 
         <div className={s.description}>
-          <div>Відчувається як {Math.round(feels_like)}°C,</div>
+          <div>Feels like {Math.round(feels_like)}°C,</div>
           <div>{description}</div>
         </div>
       </div>

@@ -9,19 +9,19 @@ const apiKey = "6988b33ac0cac63cee28223a1e642aee";
 export const forecastAPI = {
   byGeoCoordinates(lat, lon) {
     return instance.get(
-      `weather?lat=${lat}&lon=${lon}&units=metric&lang=ua&appid=${apiKey}`
+      `weather?lat=${lat}&lon=${lon}&units=metric&lang=en&appid=${apiKey}`
     );
   },
 
   byCityName(city) {
     return instance.get(
-      `weather?q=${city}&units=metric&lang=ua&appid=${apiKey}`
+      `weather?q=${city}&units=metric&lang=en&appid=${apiKey}`
     );
   },
 
   forWeek(city) {
     return instance.get(
-      `forecast?q=${city}&lang=ua&units=metric&appid=${apiKey}`
+      `forecast?q=${city}&lang=en&units=metric&appid=${apiKey}`
     );
   },
 };

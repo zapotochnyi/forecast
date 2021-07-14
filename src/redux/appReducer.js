@@ -1,4 +1,7 @@
-import { getForecastDataByGeoCoordinates } from "./forecastReducer";
+import {
+  getForecastDataByGeoCoordinates,
+  getRandomQuote,
+} from "./forecastReducer";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
 
@@ -18,15 +21,18 @@ const appReducer = (state = initialState, action) => {
       return state;
   }
 };
- 
-export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
 
-export const initializeApp = () => (dispatch) => {
-    let promise = dispatch(getForecastDataByGeoCoordinates());
-    
-    promise.then(() => {
-        dispatch(initializedSuccess());
-    });
-}
+export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
 
-export default appReducer
+export const initializeApp = (latitude, longitude) => (dispatch) => {
+  let forecastDataPromise = dispatch(
+    getForecastDataByGeoCoordinates(latitude, longitude)
+  );
+  let randomQuotePromise = dispatch(getRandomQuote());
+
+  Promise.all([forecastDataPromise, randomQuotePromise]).then(() => {
+    dispatch(initializedSuccess());
+  });
+};
+
+export default appReducer;

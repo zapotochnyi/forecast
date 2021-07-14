@@ -40,15 +40,16 @@ export const setRandomQuote = (quote) => ({
 });
 
 export const getForecastDataByGeoCoordinates =
-  (lat, lon) => async (dispatch) => {
-    const response = await forecastAPI.byGeoCoordinates(lat, lon);
-    if (response.data.cod === 200) {
-      dispatch(setTodaysForecastData(response.data));
-    } else {
-      //toto validation of errors
-      dispatch(setErrorMessage(response.data.cod));
-    }
-  };
+(lat, lon) => async (dispatch) => {
+  const response = await forecastAPI.byGeoCoordinates(lat, lon);
+  if (response.data.cod === 200) {
+    dispatch(setTodaysForecastData(response.data));
+  } else {
+    //toto validation of errors
+    dispatch(setErrorMessage(response.data.cod));
+  }
+  return response;
+};
 export const getRandomQuote = () => async (dispatch) => {
   const response = await quotesAPI.getQuotes();
   if (response.data.length !== 0) {
@@ -56,6 +57,7 @@ export const getRandomQuote = () => async (dispatch) => {
       response.data[Math.floor(Math.random() * response.data.length)];
     dispatch(setRandomQuote(randomQuote));
   }
+  return response;
 };
 
 export default forecastReducer;

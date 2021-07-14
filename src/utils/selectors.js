@@ -5,3 +5,7 @@ export const getForecastData = (state) => {
 export const getRandomQuoteData = (state) => {
   return state.forecast.randomQuote;
 };
+
+export const getInitialized = (state) => {
+  return state.app.initialized;
+};

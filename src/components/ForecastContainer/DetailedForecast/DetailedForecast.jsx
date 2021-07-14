@@ -4,7 +4,7 @@ import s from "./DetailedForecast.module.css";
 import windIcon from "../../../assets/wind.svg";
 import pressureIcon from "../../../assets/pressure.svg";
 import humidityIcon from "../../../assets/humidity.svg";
-import { useEffect } from "react";
+import quoteIcon from "../../../assets/left-quote.svg";
 
 const DetailedForecast = ({
   pressure,
@@ -19,25 +19,25 @@ const DetailedForecast = ({
           <div className={s.icon}>
             <img src={pressureIcon} alt="" />
           </div>
-          {pressure} hPa Тиск
+          {pressure} hPa Pressure
         </div>
         <div className={s.info_item}>
           <div className={s.icon}>
             <img src={humidityIcon} alt="" />
           </div>
-          {humidity} % Вологість
+          {humidity} % Humidity
         </div>
         <div className={s.info_item}>
           <div className={s.icon}>
             <img src={windIcon} alt="" />
           </div>
-          {speed} м/с Вітер
+          {speed} м/с Wind
         </div>
       </div>
 
       <div className={s.quotes_wrap}>
+        <img src={quoteIcon} alt="" />
         <div>{randomQuote.text}</div>
-
         <div>{randomQuote.author}</div>
       </div>
     </div>

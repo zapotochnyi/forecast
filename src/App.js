@@ -1,46 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
-import Forecast from "./components/ForecastContainer/Forecast";
 import { connect } from "react-redux";
 import Loader from "./components/common/Loader";
 import {
-  getForecastDataByGeoCoordinates,
-  getRandomQuote,
-} from "./redux/forecastReducer";
-import { getForecastData, getRandomQuoteData } from "./utils/selectors";
+  getInitialized,
+} from "./utils/selectors";
+import { initializeApp } from "./redux/appReducer";
+import ForecastContainer from "./components/ForecastContainer/ForecastContainer";
 
-const App = ({
-  forecastData,
-  randomQuote,
-  getForecastDataByGeoCoordinates,
-  getRandomQuote,
-}) => {
-  let [isLoader, setIsLoader] = useState(true);
-
+const App = ({ forecastData, randomQuote, initialized, initializeApp }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((data) => {
-      getForecastDataByGeoCoordinates(
-        data.coords.latitude,
-        data.coords.longitude
-      ).then(() => setIsLoader(false));
+      initializeApp(data.coords.latitude, data.coords.longitude);
     });
-  }, [getForecastDataByGeoCoordinates]);
-  //todo fix bug with initialization
-  useEffect(() => {
-    getRandomQuote();
-  }, [getRandomQuote]);
+  }, [initializeApp]);
 
   return (
     <>
-      {isLoader ? (
+      {!initialized ? (
         <Loader />
       ) : (
         <div className="app-wrapper">
           <Header />
           <NavBar />
-          <Forecast forecastData={forecastData} randomQuote={randomQuote} />
+          <ForecastContainer />
         </div>
       )}
     </>
@@ -49,12 +34,8 @@ const App = ({
 
 const mapStateToProps = (state) => {
   return {
-    forecastData: getForecastData(state),
-    randomQuote: getRandomQuoteData(state),
+    initialized: getInitialized(state),
   };
 };
 
-export default connect(mapStateToProps, {
-  getForecastDataByGeoCoordinates,
-  getRandomQuote,
-})(App);
+export default connect(mapStateToProps, { initializeApp })(App);

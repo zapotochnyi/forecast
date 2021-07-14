@@ -1,22 +1,46 @@
 .detailed_forecast_wrap {
-    display: flex;
+  display: flex;
+  justify-content: space-between;
 }
 
 .info_wrap {
-    padding-left: 50px;
+  padding-left: 50px;
 }
 
 .info_item {
-    color: whitesmoke;
-    margin-bottom: 20px;
-    font-size: large;
-    display: flex;
+  color: whitesmoke;
+  margin-bottom: 20px;
+  font-size: large;
+  display: flex;
 }
 
 .info_item img {
-    width: 25px;
+  width: 25px;
 }
 
 .icon {
-    margin-right: 25px;
+  margin-right: 25px;
+}
+
+.quotes_wrap {
+  width: 420px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.quotes_wrap div {
+  color: whitesmoke;
+  font-style: oblique;
+  padding-left: 20px;
+}
+
+.quotes_wrap img {
+    width: 20px;
+}
+
+.quotes_wrap :last-child {
+    text-align: end;
 }
