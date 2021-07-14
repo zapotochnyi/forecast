@@ -7,18 +7,21 @@ import TimeSetter from "./TimeSetter/TimeSetter";
 const Forecast = ({
   forecastData: {
     weather,
-    name,
-    main: { temp, feels_like },
+    main: { temp, feels_like, pressure, humidity },
+    wind,
   },
+  randomQuote,
 }) => {
+
   return (
     <div className={s.forecast_wrap}>
-      <MainForecast
-        weather={weather[0]}
-        temp={temp}
-        feels_like={feels_like}
+      <MainForecast weather={weather[0]} temp={temp} feels_like={feels_like} />
+      <DetailedForecast
+        pressure={pressure}
+        humidity={humidity}
+        wind={wind}
+        randomQuote={randomQuote}
       />
-      <DetailedForecast />
       <TimeSetter />
     </div>
   );

@@ -5,9 +5,18 @@ import NavBar from "./components/NavBar";
 import Forecast from "./components/ForecastContainer/Forecast";
 import { connect } from "react-redux";
 import Loader from "./components/common/Loader";
-import { getForecastDataByGeoCoordinates } from "./redux/forecastReducer";
+import {
+  getForecastDataByGeoCoordinates,
+  getRandomQuote,
+} from "./redux/forecastReducer";
+import { getForecastData, getRandomQuoteData } from "./utils/selectors";
 
-const App = ({ getForecastDataByGeoCoordinates, forecastData }) => {
+const App = ({
+  forecastData,
+  randomQuote,
+  getForecastDataByGeoCoordinates,
+  getRandomQuote,
+}) => {
   let [isLoader, setIsLoader] = useState(true);
 
   useEffect(() => {
@@ -18,6 +27,10 @@ const App = ({ getForecastDataByGeoCoordinates, forecastData }) => {
       ).then(() => setIsLoader(false));
     });
   }, [getForecastDataByGeoCoordinates]);
+  //todo fix bug with initialization
+  useEffect(() => {
+    getRandomQuote();
+  }, [getRandomQuote]);
 
   return (
     <>
@@ -27,7 +40,7 @@ const App = ({ getForecastDataByGeoCoordinates, forecastData }) => {
         <div className="app-wrapper">
           <Header />
           <NavBar />
-          <Forecast forecastData={forecastData} />
+          <Forecast forecastData={forecastData} randomQuote={randomQuote} />
         </div>
       )}
     </>
@@ -36,10 +49,12 @@ const App = ({ getForecastDataByGeoCoordinates, forecastData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    forecastData: state.forecast.forecastData,
+    forecastData: getForecastData(state),
+    randomQuote: getRandomQuoteData(state),
   };
 };
 
-export default connect(mapStateToProps, { getForecastDataByGeoCoordinates })(
-  App
-);
+export default connect(mapStateToProps, {
+  getForecastDataByGeoCoordinates,
+  getRandomQuote,
+})(App);

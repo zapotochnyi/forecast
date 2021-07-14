@@ -20,6 +20,18 @@ export const forecastAPI = {
   },
 
   forWeek(city) {
-    return instance.get(`forecast?q=${city}&lang=ua&units=metric&appid=${apiKey}`)
-  }
+    return instance.get(
+      `forecast?q=${city}&lang=ua&units=metric&appid=${apiKey}`
+    );
+  },
+};
+
+const instanceQuotes = axios.create({
+  baseURL: "https://type.fit/api/quotes",
+});
+
+export const quotesAPI = {
+  getQuotes() {
+    return instanceQuotes.get()
+  },
 };

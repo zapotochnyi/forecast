@@ -1,3 +1,22 @@
 .detailed_forecast_wrap {
-    background-color: brown;
+    display: flex;
+}
+
+.info_wrap {
+    padding-left: 50px;
+}
+
+.info_item {
+    color: whitesmoke;
+    margin-bottom: 20px;
+    font-size: large;
+    display: flex;
+}
+
+.info_item img {
+    width: 25px;
+}
+
+.icon {
+    margin-right: 25px;
 }

@@ -1,11 +1,13 @@
-import { forecastAPI } from "../api/api";
+import { forecastAPI, quotesAPI } from "../api/api";
 
 const SET_FORECAST_DATA = "SET_FORECAST_DATA";
 const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
+const SET_RANDOM_QUOTE = "SET_RANDOM_QUOTE";
 
 let initialState = {
   forecastData: null,
   errorMessage: null,
+  randomQuote: null,
 };
 
 const forecastReducer = (state = initialState, action) => {
@@ -15,6 +17,9 @@ const forecastReducer = (state = initialState, action) => {
 
     case SET_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage };
+
+    case SET_RANDOM_QUOTE:
+      return { ...state, randomQuote: action.quote };
 
     default:
       return state;
@@ -29,6 +34,10 @@ export const setErrorMessage = (errorMessage) => ({
   type: SET_ERROR_MESSAGE,
   errorMessage,
 });
+export const setRandomQuote = (quote) => ({
+  type: SET_RANDOM_QUOTE,
+  quote,
+});
 
 export const getForecastDataByGeoCoordinates =
   (lat, lon) => async (dispatch) => {
@@ -40,4 +49,13 @@ export const getForecastDataByGeoCoordinates =
       dispatch(setErrorMessage(response.data.cod));
     }
   };
+export const getRandomQuote = () => async (dispatch) => {
+  const response = await quotesAPI.getQuotes();
+  if (response.data.length !== 0) {
+    const randomQuote =
+      response.data[Math.floor(Math.random() * response.data.length)];
+    dispatch(setRandomQuote(randomQuote));
+  }
+};
+
 export default forecastReducer;

@@ -1,9 +1,10 @@
 import React from "react";
-import loader from "../../assets/loading1.gif";
+import loader from "../../assets/loading.svg";
+import s from "./Loading.module.css"
 
 const Loader = () => {
   return (
-    <div>
+    <div className={s.loader_wrap} >
       <img src={loader} alt="loader" />
     </div>
   );

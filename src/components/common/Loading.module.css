@@ -1,0 +1,10 @@
+.loader_wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader_wrap img {
+    width: 200px;
+}

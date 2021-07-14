@@ -1,6 +1,7 @@
 .main_forecast_wrap {
     display: flex;
     justify-content: space-between;
+    height: 300px;
 }
 
 .temp_description_wrap {
