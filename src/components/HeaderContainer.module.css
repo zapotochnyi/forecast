@@ -1,0 +1,25 @@
+.header_wrap {
+  grid-area: h;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.city_name {
+  position: relative;
+  left: 17%;
+  width: 100px;
+}
+
+.city_name :first-child {
+  position: absolute;
+  top: 40%;
+  transform: translate(0, -50%);
+  font-size: xx-large;
+}
+
+.city_name :last-child {
+  position: absolute;
+  top: 60%;
+  font-size: small;
+}

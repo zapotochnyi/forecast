@@ -11,7 +11,7 @@ import clearDay from "../../../assets/weatherIcons/day.svg";
 const MainForecast = ({ weather: { description, main }, temp, feels_like }) => {
   let img;
 
-  switch (main) {
+  switch (main) { 
     case "Clouds":
       img = cloudyDay;
       break;

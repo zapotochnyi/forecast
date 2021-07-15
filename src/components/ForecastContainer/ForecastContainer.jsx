@@ -1,22 +1,18 @@
 import React from "react";
-import s from "./ForecastContainer.module.css"
+import s from "./ForecastContainer.module.css";
 import { connect } from "react-redux";
-import { getForecastData, getRandomQuoteData } from "../../utils/selectors"
+import { getForecastData, getRandomQuoteData } from "../../utils/selectors";
 import DetailedForecast from "./DetailedForecast/DetailedForecast";
 import MainForecast from "./MainForecast/MainForecast";
 import TimeSetter from "./TimeSetter/TimeSetter";
 
 const ForecastContainer = ({
-  forecastData: {
-    weather,
-    main: { temp, feels_like, pressure, humidity },
-    wind,
-  },
+  forecastData: { weather, temp, feels_like, pressure, humidity, wind },
   randomQuote,
 }) => {
   return (
     <div className={s.forecast_wrap}>
-      <MainForecast weather={weather[0]} temp={temp} feels_like={feels_like} />
+      <MainForecast weather={weather} temp={temp} feels_like={feels_like} />
       <DetailedForecast
         pressure={pressure}
         humidity={humidity}
@@ -25,7 +21,7 @@ const ForecastContainer = ({
       />
       <TimeSetter />
     </div>
-  )
+  );
 };
 
 const mapStateToProps = (state) => {

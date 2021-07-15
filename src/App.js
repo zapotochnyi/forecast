@@ -1,20 +1,23 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Header from "./components/Header";
-import NavBar from "./components/NavBar";
+import HeaderContainer from "./components/HeaderContainer";
+import NavBarContainer from "./components/NavBarContainer/NavBarContainer";
 import { connect } from "react-redux";
 import Loader from "./components/common/Loader";
-import {
-  getInitialized,
-} from "./utils/selectors";
+import { getInitialized } from "./utils/selectors";
 import { initializeApp } from "./redux/appReducer";
 import ForecastContainer from "./components/ForecastContainer/ForecastContainer";
 
-const App = ({ forecastData, randomQuote, initialized, initializeApp }) => {
+const App = ({ initialized, initializeApp }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((data) => {
       initializeApp(data.coords.latitude, data.coords.longitude);
     });
+    let date = new Date("2020-08-05 18:00:00").toLocaleString("en-GB", {
+      weekday: "long",
+    });
+
+    console.log(date);
   }, [initializeApp]);
 
   return (
@@ -23,8 +26,8 @@ const App = ({ forecastData, randomQuote, initialized, initializeApp }) => {
         <Loader />
       ) : (
         <div className="app-wrapper">
-          <Header />
-          <NavBar />
+          <HeaderContainer />
+          <NavBarContainer />
           <ForecastContainer />
         </div>
       )}

@@ -1,6 +1,7 @@
 import {
   getForecastDataByGeoCoordinates,
   getRandomQuote,
+  getWeeklyForecastData,
 } from "./forecastReducer";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
@@ -28,9 +29,12 @@ export const initializeApp = (latitude, longitude) => (dispatch) => {
   let forecastDataPromise = dispatch(
     getForecastDataByGeoCoordinates(latitude, longitude)
   );
+  let weeklyForecastDataPromise = dispatch(
+    getWeeklyForecastData(latitude, longitude)
+  );
   let randomQuotePromise = dispatch(getRandomQuote());
 
-  Promise.all([forecastDataPromise, randomQuotePromise]).then(() => {
+  Promise.all([forecastDataPromise, weeklyForecastDataPromise, randomQuotePromise]).then(() => {
     dispatch(initializedSuccess());
   });
 };

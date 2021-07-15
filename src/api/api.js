@@ -19,10 +19,12 @@ export const forecastAPI = {
     );
   },
 
-  forWeek(city) {
-    return instance.get(
-      `forecast?q=${city}&lang=en&units=metric&appid=${apiKey}`
-    );
+  forWeekByGeoCoordinates(lat, lon) {
+    return instance.get(`forecast?lat=${lat}&lon=${lon}&lang=en&units=metric&appid=${apiKey}`);
+  },
+
+  forWeekByCityName(city) {
+    return instance.get(`forecast?q=${city}&lang=en&units=metric&appid=${apiKey}`);
   },
 };
 
@@ -32,6 +34,6 @@ const instanceQuotes = axios.create({
 
 export const quotesAPI = {
   getQuotes() {
-    return instanceQuotes.get()
+    return instanceQuotes.get();
   },
 };
