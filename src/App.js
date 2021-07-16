@@ -13,11 +13,12 @@ const App = ({ initialized, initializeApp }) => {
     navigator.geolocation.getCurrentPosition((data) => {
       initializeApp(data.coords.latitude, data.coords.longitude);
     });
-    let date = new Date("2020-08-05 18:00:00").toLocaleString("en-GB", {
-      weekday: "long",
+    let arr = [5, 3, 8, 10, 24];
+    arr.sort((a, b) => {
+      return a - b;
     });
 
-    console.log(date);
+    console.log(arr);
   }, [initializeApp]);
 
   return (

@@ -2,11 +2,13 @@ import { forecastAPI, quotesAPI } from "../api/api";
 
 const SET_FORECAST_DATA = "SET_FORECAST_DATA";
 const SET_WEEKLY_FORECAST_DATA = "SET_WEEKLY_FORECAST_DATA";
+const SET_CURRENT_FORECAST_DATA = "SET_CURRENT_FORECAST_DATA";
 const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
 const SET_RANDOM_QUOTE = "SET_RANDOM_QUOTE";
 
 let initialState = {
   forecastData: null,
+  currentForecastData: null,
   weeklyForecastData: null,
   errorMessage: null,
   randomQuote: null,
@@ -19,6 +21,12 @@ const forecastReducer = (state = initialState, action) => {
 
     case SET_WEEKLY_FORECAST_DATA:
       return { ...state, weeklyForecastData: action.week };
+
+      case SET_CURRENT_FORECAST_DATA:
+        return {
+          ...state,
+          currentForecastData: state.weeklyForecastData[action.index]
+        }
 
     case SET_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage };
@@ -39,6 +47,7 @@ export const setWeeklyForecastData = (week) => ({
   type: SET_WEEKLY_FORECAST_DATA,
   week,
 });
+export const setCurrentForecastData = (index = 0) => ({type: SET_CURRENT_FORECAST_DATA, index})
 export const setErrorMessage = (errorMessage) => ({
   type: SET_ERROR_MESSAGE,
   errorMessage,
@@ -106,71 +115,89 @@ export const getWeeklyForecastData = (lat, lon) => async (dispatch) => {
       });
     };
 
-    const createUnicodeDate = (arr) => {
-      let dt;
-      arr.map((elem) => {
-        return (dt = elem.dt);
+    const createUnicodeDateArr = (arr) => {
+      return arr.map((elem) => {
+        return elem.dt;
       });
-      return dt;
     };
 
     let week = [
       {
         day: "Monday",
-        dt: createUnicodeDate(response.data.list),
+        dt: createUnicodeDateArr(
+          response.data.list.filter((day) => findDay(day, "Monday"))
+        )[0],
         data: createForecastArr(
           response.data.list.filter((day) => findDay(day, "Monday"))
         ),
       },
       {
         day: "Tuesday",
-        dt: createUnicodeDate(response.data.list),
+        dt: createUnicodeDateArr(
+          response.data.list.filter((day) => findDay(day, "Tuesday"))
+        )[0],
         data: createForecastArr(
           response.data.list.filter((day) => findDay(day, "Tuesday"))
         ),
       },
       {
         day: "Wednesday",
-        dt: createUnicodeDate(response.data.list),
+        dt: createUnicodeDateArr(
+          response.data.list.filter((day) => findDay(day, "Wednesday"))
+        )[0],
         data: createForecastArr(
           response.data.list.filter((day) => findDay(day, "Wednesday"))
         ),
       },
       {
         day: "Thursday",
-        dt: createUnicodeDate(response.data.list),
+        dt: createUnicodeDateArr(
+          response.data.list.filter((day) => findDay(day, "Thursday"))
+        )[0],
         data: createForecastArr(
           response.data.list.filter((day) => findDay(day, "Thursday"))
         ),
       },
       {
         day: "Friday",
-        dt: createUnicodeDate(response.data.list),
+        dt: createUnicodeDateArr(
+          response.data.list.filter((day) => findDay(day, "Friday"))
+        )[0],
         data: createForecastArr(
           response.data.list.filter((day) => findDay(day, "Friday"))
         ),
       },
       {
         day: "Saturday",
-        dt: createUnicodeDate(response.data.list),
+        dt: createUnicodeDateArr(
+          response.data.list.filter((day) => findDay(day, "Saturday"))
+        )[0],
         data: createForecastArr(
           response.data.list.filter((day) => findDay(day, "Saturday"))
         ),
       },
       {
         day: "Sunday",
-        dt: createUnicodeDate(response.data.list),
+        dt: createUnicodeDateArr(
+          response.data.list.filter((day) => findDay(day, "Sunday"))
+        )[0],
         data: createForecastArr(
           response.data.list.filter((day) => findDay(day, "Sunday"))
         ),
       },
     ];
 
-    // week.data[0].sort((a, b) => {
-    //   if (a.data[0].dt > b.data[0].dt) return 1;
-    //   if (a.data[0].dt < b.data[0].dt) return -1;
-    //   return 0;
-    // });
+    week
+      .sort((a, b) => {
+        if (a.dt < b.dt) {
+          return 1;
+        }
+        if (a.dt > b.dt) {
+          return -1;
+        }
+        return 0;
+      })
+      .reverse();
 
     dispatch(setWeeklyForecastData(week));
   } else {

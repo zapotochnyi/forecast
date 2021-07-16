@@ -8,13 +8,8 @@ const NavBarContainer = ({ week }) => {
   return (
     <div className={s.navbar_wrap}>
       {week.map((dayItem) => {
-        if (
-          !(dayItem.data.length > 0) ||
-          dayItem.day ===
-            new Date().toLocaleString("en-GB", { weekday: "long" })
-        )
-          return null;
-        return <DayItem day={dayItem.day} date={dayItem.data[0].date} />;
+        if (!(dayItem.data.length >= 1)) return null;
+        return <DayItem key={dayItem.dt} day={dayItem.day} date={dayItem.data[0].date} />;
       })}
     </div>
   );
