@@ -8,17 +8,11 @@ import { getInitialized } from "./utils/selectors";
 import { initializeApp } from "./redux/appReducer";
 import ForecastContainer from "./components/ForecastContainer/ForecastContainer";
 
-const App = ({ initialized, initializeApp }) => {
+const App = ({ initialized, initializeApp, setCurrentForecastData }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((data) => {
       initializeApp(data.coords.latitude, data.coords.longitude);
     });
-    let arr = [5, 3, 8, 10, 24];
-    arr.sort((a, b) => {
-      return a - b;
-    });
-
-    console.log(arr);
   }, [initializeApp]);
 
   return (
@@ -42,4 +36,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { initializeApp })(App);
+export default connect(mapStateToProps, {
+  initializeApp,
+})(App);

@@ -22,11 +22,11 @@ const forecastReducer = (state = initialState, action) => {
     case SET_WEEKLY_FORECAST_DATA:
       return { ...state, weeklyForecastData: action.week };
 
-      case SET_CURRENT_FORECAST_DATA:
-        return {
-          ...state,
-          currentForecastData: state.weeklyForecastData[action.index]
-        }
+    case SET_CURRENT_FORECAST_DATA:
+      return {
+        ...state,
+        currentForecastData: state.weeklyForecastData[action.index].data[0],
+      };
 
     case SET_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage };
@@ -47,7 +47,10 @@ export const setWeeklyForecastData = (week) => ({
   type: SET_WEEKLY_FORECAST_DATA,
   week,
 });
-export const setCurrentForecastData = (index = 0) => ({type: SET_CURRENT_FORECAST_DATA, index})
+export const setCurrentForecastData = (index = 0) => ({
+  type: SET_CURRENT_FORECAST_DATA,
+  index,
+});
 export const setErrorMessage = (errorMessage) => ({
   type: SET_ERROR_MESSAGE,
   errorMessage,
@@ -199,7 +202,10 @@ export const getWeeklyForecastData = (lat, lon) => async (dispatch) => {
       })
       .reverse();
 
-    dispatch(setWeeklyForecastData(week));
+    let filteredWeek = week.filter((day) => !(day.data.length === 0));
+
+    dispatch(setWeeklyForecastData(filteredWeek));
+    dispatch(setCurrentForecastData(0));
   } else {
     dispatch(setErrorMessage(response.data.cod + "Something was wrong"));
   }

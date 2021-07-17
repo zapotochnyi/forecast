@@ -9,7 +9,7 @@ import quoteIcon from "../../../assets/left-quote.svg";
 const DetailedForecast = ({
   pressure,
   humidity,
-  wind: { speed },
+  wind,
   randomQuote,
 }) => {
   return (
@@ -31,7 +31,7 @@ const DetailedForecast = ({
           <div className={s.icon}>
             <img src={windIcon} alt="" />
           </div>
-          {speed} м/с Wind
+          {wind} m/s Wind
         </div>
       </div>
 

@@ -1,4 +1,6 @@
 .navbar_wrap {
-    grid-area: n;
-    box-sizing: border-box;
+  grid-area: n;
+  box-sizing: border-box;
+  background-color: rgb(30, 25, 110);
+  height: min-content;
 }

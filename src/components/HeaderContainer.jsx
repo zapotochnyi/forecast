@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCityName } from "../utils/selectors";
+import { getCityName, getDate } from "../utils/selectors";
 import s from "./HeaderContainer.module.css";
 
-const HeaderContainer = ({ cityName }) => {
+const HeaderContainer = ({ cityName, date }) => {
   return (
     <div className={s.header_wrap}>
       <div className={s.city_name}>
         <span>{cityName}</span>
-        <span>Feb 03, Monday</span>
+        <span>kbndasd</span>
       </div>
       <div>Search</div>
     </div>
