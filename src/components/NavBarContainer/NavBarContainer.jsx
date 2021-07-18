@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import s from "./NavBarContainer.module.css";
 import { getWeeklyForecastData } from "../../utils/selectors.js";
 import DayItem from "./DayItem/DayItem";
-import { setCurrentForecastData } from "../../redux/forecastReducer";
-import { useEffect } from "react";
+import { setCurrentDayData } from "../../redux/forecastReducer";
 import classNames from "classnames";
+import { getRandomQuote } from "../../redux/forecastReducer";
 
-const NavBarContainer = ({ week, setCurrentForecastData }) => {
+const NavBarContainer = ({ week, setCurrentDayData, getRandomQuote }) => {
   let [activeClass, setActiveClass] = useState(0);
 
   let dayItemClasses = (index, activeClass) => {
@@ -21,17 +21,18 @@ const NavBarContainer = ({ week, setCurrentForecastData }) => {
       not_active: !(index === activeClass),
     });
   };
-
+  //todo empty containers for UI
   return (
     <div className={s.navbar_wrap}>
       {week.map((dayItem, index) => {
         if (!(dayItem.data.length >= 1)) return null;
         return (
           <DayItem
-            setCurrentForecastData={setCurrentForecastData}
+            setCurrentDayData={setCurrentDayData}
             activeClass={activeClass}
             setActiveClass={setActiveClass}
             dayItemClasses={dayItemClasses}
+            getRandomQuote={getRandomQuote}
             key={dayItem.dt}
             index={index}
             day={dayItem.day}
@@ -49,6 +50,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setCurrentForecastData })(
+export default connect(mapStateToProps, { setCurrentDayData, getRandomQuote })(
   NavBarContainer
 );

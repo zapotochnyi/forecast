@@ -8,7 +8,7 @@ const HeaderContainer = ({ cityName, date }) => {
     <div className={s.header_wrap}>
       <div className={s.city_name}>
         <span>{cityName}</span>
-        <span>kbndasd</span>
+        <span>{date}</span>
       </div>
       <div>Search</div>
     </div>
@@ -18,6 +18,7 @@ const HeaderContainer = ({ cityName, date }) => {
 const mapStateToProps = (state) => {
   return {
     cityName: getCityName(state),
+    date: getDate(state),
   };
 };
 

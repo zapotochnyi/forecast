@@ -1,3 +1,16 @@
 .time_setter_wrap {
-    background-color: cadetblue;
+  margin-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  height: 4.9em;
+}
+
+.time_setter_wrap input {
+  width: 100%;
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+  color: whitesmoke;
 }

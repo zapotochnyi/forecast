@@ -1,6 +1,3 @@
-// export const getForecastData = (state) => {
-//   return state.forecast.forecastData;
-// };
 export const getCurrentForecastData = (state) => {
   return state.forecast.currentForecastData;
 };
@@ -14,17 +11,17 @@ export const getInitialized = (state) => {
 };
 
 export const getCityName = (state) => {
-  return state.forecast.forecastData.name;
+  return state.forecast.city;
 };
 
-// export const getDayName = (state) => {
-//   return state.forecast.currentForecastData.day;
-// };
-
-// export const getDate = (state) => {
-//   return state.forecast.currentForecastData.date;
-// };
+export const getDate = (state) => {
+  return state.forecast.currentForecastData.date;
+};
 
 export const getWeeklyForecastData = (state) => {
   return state.forecast.weeklyForecastData;
+};
+
+export const getTimeIndex = (state) => {
+  return state.forecast.timeIndex;
 };

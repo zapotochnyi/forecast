@@ -1,31 +1,51 @@
 import { forecastAPI, quotesAPI } from "../api/api";
 
-const SET_FORECAST_DATA = "SET_FORECAST_DATA";
 const SET_WEEKLY_FORECAST_DATA = "SET_WEEKLY_FORECAST_DATA";
+const SET_CURRENT_DAY = "SET_CURRENT_DAY";
+const SET_CURRENT_TIME = "SET_CURRENT_TIME";
 const SET_CURRENT_FORECAST_DATA = "SET_CURRENT_FORECAST_DATA";
+const SET_CITY = "SET_CITY";
 const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
 const SET_RANDOM_QUOTE = "SET_RANDOM_QUOTE";
 
 let initialState = {
-  forecastData: null,
-  currentForecastData: null,
   weeklyForecastData: null,
+  currentForecastData: null,
+  dayIndex: 0,
+  timeIndex: 0,
+  city: null,
   errorMessage: null,
   randomQuote: null,
 };
 
 const forecastReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_FORECAST_DATA:
-      return { ...state, forecastData: action.payload };
-
     case SET_WEEKLY_FORECAST_DATA:
       return { ...state, weeklyForecastData: action.week };
+
+    case SET_CURRENT_DAY:
+      return {
+        ...state,
+        dayIndex: action.dayIndex,
+      };
+
+    case SET_CURRENT_TIME:
+      return {
+        ...state,
+        timeIndex: action.timeIndex,
+      };
 
     case SET_CURRENT_FORECAST_DATA:
       return {
         ...state,
-        currentForecastData: state.weeklyForecastData[action.index].data[0],
+        currentForecastData:
+          state.weeklyForecastData[state.dayIndex].data[(state.timeIndex)],
+      };
+
+    case SET_CITY:
+      return {
+        ...state,
+        city: action.city,
       };
 
     case SET_ERROR_MESSAGE:
@@ -39,18 +59,22 @@ const forecastReducer = (state = initialState, action) => {
   }
 };
 
-export const setTodaysForecastData = (payload) => ({
-  type: SET_FORECAST_DATA,
-  payload,
-});
 export const setWeeklyForecastData = (week) => ({
   type: SET_WEEKLY_FORECAST_DATA,
   week,
 });
-export const setCurrentForecastData = (index = 0) => ({
-  type: SET_CURRENT_FORECAST_DATA,
-  index,
+export const setCurrentDay = (dayIndex = 0) => ({
+  type: SET_CURRENT_DAY,
+  dayIndex,
 });
+export const setCurrentTime = (timeIndex = 0) => ({
+  type: SET_CURRENT_TIME,
+  timeIndex,
+});
+export const setCurrentForecastData = () => ({
+  type: SET_CURRENT_FORECAST_DATA,
+});
+export const setCity = (city) => ({ type: SET_CITY, city });
 export const setErrorMessage = (errorMessage) => ({
   type: SET_ERROR_MESSAGE,
   errorMessage,
@@ -60,157 +84,149 @@ export const setRandomQuote = (quote) => ({
   quote,
 });
 
+const processForecastData = (forecastData) => {
+  const findDay = (day, dayName) => {
+    let date = new Date(day.dt_txt).toLocaleString("en-GB", {
+      weekday: "long",
+    });
+    return date === dayName;
+  };
+
+  const createForecastArr = (arr) => {
+    return arr.map((elem) => {
+      let date = new Date(elem.dt_txt).toLocaleString("en-GB", {
+        month: "long",
+        day: "numeric",
+      });
+      let time = new Date(elem.dt_txt).toLocaleString("en-GB", {
+        hour: "numeric",
+        minute: "numeric",
+      });
+      return {
+        date,
+        time,
+        temp: elem.main.temp,
+        feels_like: elem.main.feels_like,
+        weather: elem.weather[0],
+        pressure: elem.main.pressure,
+        humidity: elem.main.humidity,
+        wind: elem.wind.speed,
+      };
+    });
+  };
+
+  const createUnicodeDateArr = (arr) => {
+    return arr.map((elem) => {
+      return elem.dt;
+    });
+  };
+
+  let week = [
+    {
+      day: "Monday",
+      dt: createUnicodeDateArr(
+        forecastData.filter((day) => findDay(day, "Monday"))
+      )[0],
+      data: createForecastArr(
+        forecastData.filter((day) => findDay(day, "Monday"))
+      ),
+    },
+    {
+      day: "Tuesday",
+      dt: createUnicodeDateArr(
+        forecastData.filter((day) => findDay(day, "Tuesday"))
+      )[0],
+      data: createForecastArr(
+        forecastData.filter((day) => findDay(day, "Tuesday"))
+      ),
+    },
+    {
+      day: "Wednesday",
+      dt: createUnicodeDateArr(
+        forecastData.filter((day) => findDay(day, "Wednesday"))
+      )[0],
+      data: createForecastArr(
+        forecastData.filter((day) => findDay(day, "Wednesday"))
+      ),
+    },
+    {
+      day: "Thursday",
+      dt: createUnicodeDateArr(
+        forecastData.filter((day) => findDay(day, "Thursday"))
+      )[0],
+      data: createForecastArr(
+        forecastData.filter((day) => findDay(day, "Thursday"))
+      ),
+    },
+    {
+      day: "Friday",
+      dt: createUnicodeDateArr(
+        forecastData.filter((day) => findDay(day, "Friday"))
+      )[0],
+      data: createForecastArr(
+        forecastData.filter((day) => findDay(day, "Friday"))
+      ),
+    },
+    {
+      day: "Saturday",
+      dt: createUnicodeDateArr(
+        forecastData.filter((day) => findDay(day, "Saturday"))
+      )[0],
+      data: createForecastArr(
+        forecastData.filter((day) => findDay(day, "Saturday"))
+      ),
+    },
+    {
+      day: "Sunday",
+      dt: createUnicodeDateArr(
+        forecastData.filter((day) => findDay(day, "Sunday"))
+      )[0],
+      data: createForecastArr(
+        forecastData.filter((day) => findDay(day, "Sunday"))
+      ),
+    },
+  ];
+
+  week
+    .sort((a, b) => {
+      if (a.dt < b.dt) {
+        return 1;
+      }
+      if (a.dt > b.dt) {
+        return -1;
+      }
+      return 0;
+    })
+    .reverse();
+
+  let filteredWeek = week.filter((day) => !(day.data.length === 0));
+  return filteredWeek;
+};
+
 export const getForecastDataByGeoCoordinates =
   (lat, lon) => async (dispatch) => {
-    const response = await forecastAPI.byGeoCoordinates(lat, lon);
+    const response = await forecastAPI.forWeekByGeoCoordinates(lat, lon);
 
-    if (response.data.cod === 200) {
-      let dataArr = {
-        name: response.data.name,
-        temp: response.data.main.temp,
-        feels_like: response.data.main.feels_like,
-        weather: response.data.weather[0],
-        pressure: response.data.main.pressure,
-        humidity: response.data.main.humidity,
-        wind: response.data.wind.speed,
-      };
-
-      dispatch(setTodaysForecastData(dataArr));
+    if (response.data.cod === "200") {
+      dispatch(setCity(response.data.city.name));
+      dispatch(setWeeklyForecastData(processForecastData(response.data.list)));
+      dispatch(setCurrentDayData(0));
     } else {
-      //toto validation of errors
       dispatch(setErrorMessage(response.data.cod + "Something was wrong"));
     }
 
     return response;
   };
 
-export const getWeeklyForecastData = (lat, lon) => async (dispatch) => {
-  const response = await forecastAPI.forWeekByGeoCoordinates(lat, lon);
-
-  if (response.data.cod === "200") {
-    const findDay = (day, dayName) => {
-      let date = new Date(day.dt_txt).toLocaleString("en-GB", {
-        weekday: "long",
-      });
-      return date === dayName;
-    };
-
-    const createForecastArr = (arr) => {
-      return arr.map((elem) => {
-        let date = new Date(elem.dt_txt).toLocaleString("en-GB", {
-          month: "long",
-          day: "numeric",
-        });
-        let time = new Date(elem.dt_txt).toLocaleString("en-GB", {
-          hour: "numeric",
-          minute: "numeric",
-        });
-        return {
-          date,
-          time,
-          temp: elem.main.temp,
-          feels_like: elem.main.feels_like,
-          weather: elem.weather[0],
-          pressure: elem.main.pressure,
-          humidity: elem.main.humidity,
-          wind: elem.wind.speed,
-        };
-      });
-    };
-
-    const createUnicodeDateArr = (arr) => {
-      return arr.map((elem) => {
-        return elem.dt;
-      });
-    };
-
-    let week = [
-      {
-        day: "Monday",
-        dt: createUnicodeDateArr(
-          response.data.list.filter((day) => findDay(day, "Monday"))
-        )[0],
-        data: createForecastArr(
-          response.data.list.filter((day) => findDay(day, "Monday"))
-        ),
-      },
-      {
-        day: "Tuesday",
-        dt: createUnicodeDateArr(
-          response.data.list.filter((day) => findDay(day, "Tuesday"))
-        )[0],
-        data: createForecastArr(
-          response.data.list.filter((day) => findDay(day, "Tuesday"))
-        ),
-      },
-      {
-        day: "Wednesday",
-        dt: createUnicodeDateArr(
-          response.data.list.filter((day) => findDay(day, "Wednesday"))
-        )[0],
-        data: createForecastArr(
-          response.data.list.filter((day) => findDay(day, "Wednesday"))
-        ),
-      },
-      {
-        day: "Thursday",
-        dt: createUnicodeDateArr(
-          response.data.list.filter((day) => findDay(day, "Thursday"))
-        )[0],
-        data: createForecastArr(
-          response.data.list.filter((day) => findDay(day, "Thursday"))
-        ),
-      },
-      {
-        day: "Friday",
-        dt: createUnicodeDateArr(
-          response.data.list.filter((day) => findDay(day, "Friday"))
-        )[0],
-        data: createForecastArr(
-          response.data.list.filter((day) => findDay(day, "Friday"))
-        ),
-      },
-      {
-        day: "Saturday",
-        dt: createUnicodeDateArr(
-          response.data.list.filter((day) => findDay(day, "Saturday"))
-        )[0],
-        data: createForecastArr(
-          response.data.list.filter((day) => findDay(day, "Saturday"))
-        ),
-      },
-      {
-        day: "Sunday",
-        dt: createUnicodeDateArr(
-          response.data.list.filter((day) => findDay(day, "Sunday"))
-        )[0],
-        data: createForecastArr(
-          response.data.list.filter((day) => findDay(day, "Sunday"))
-        ),
-      },
-    ];
-
-    week
-      .sort((a, b) => {
-        if (a.dt < b.dt) {
-          return 1;
-        }
-        if (a.dt > b.dt) {
-          return -1;
-        }
-        return 0;
-      })
-      .reverse();
-
-    let filteredWeek = week.filter((day) => !(day.data.length === 0));
-
-    dispatch(setWeeklyForecastData(filteredWeek));
-    dispatch(setCurrentForecastData(0));
-  } else {
-    dispatch(setErrorMessage(response.data.cod + "Something was wrong"));
-  }
-
-  return response;
+export const setCurrentDayData = (dayIndex) => (dispatch) => {
+  dispatch(setCurrentDay(dayIndex));
+  dispatch(setCurrentForecastData());
+};
+//todo fix bug with range slider
+export const setCurrentTimeData = (timeIndex) => (dispatch) => {
+  let parsedTimeIndex = parseInt(timeIndex);
+  dispatch(setCurrentTime(parsedTimeIndex));
+  dispatch(setCurrentForecastData());
 };
 
 export const getRandomQuote = () => async (dispatch) => {

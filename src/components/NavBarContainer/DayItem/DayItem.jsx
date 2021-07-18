@@ -5,14 +5,16 @@ const DayItem = ({
   day,
   date,
   index,
-  setCurrentForecastData,
+  setCurrentDayData,
   activeClass,
   setActiveClass,
   dayItemClasses,
+  getRandomQuote,
 }) => {
   const handleClick = (e) => {
-    setCurrentForecastData(index);
+    setCurrentDayData(index);
     setActiveClass(index);
+    getRandomQuote();
   };
 
   return (
