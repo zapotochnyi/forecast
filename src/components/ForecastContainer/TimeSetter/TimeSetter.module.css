@@ -5,12 +5,4 @@
   height: 4.9em;
 }
 
-.time_setter_wrap input {
-  width: 100%;
-}
 
-.time {
-  display: flex;
-  justify-content: space-between;
-  color: whitesmoke;
-}

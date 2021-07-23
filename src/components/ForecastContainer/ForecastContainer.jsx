@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import {
   getCurrentForecastData,
   getRandomQuoteData,
-  getTimeIndex,
+  getTimeMarks,
 } from "../../utils/selectors";
 import DetailedForecast from "./DetailedForecast/DetailedForecast";
 import MainForecast from "./MainForecast/MainForecast";
@@ -15,6 +15,7 @@ const ForecastContainer = ({
   currentForecastData: { weather, temp, feels_like, pressure, humidity, wind },
   randomQuote,
   timeIndex,
+  timeMarks,
   setCurrentTimeData,
 }) => {
   return (
@@ -27,7 +28,7 @@ const ForecastContainer = ({
         randomQuote={randomQuote}
       />
       <TimeSetter
-        timeIndex={timeIndex}
+        timeMarks={timeMarks}
         setCurrentTimeData={setCurrentTimeData}
       />
     </div>
@@ -38,7 +39,7 @@ const mapStateToProps = (state) => {
   return {
     currentForecastData: getCurrentForecastData(state),
     randomQuote: getRandomQuoteData(state),
-    timeIndex: getTimeIndex(state),
+    timeMarks: getTimeMarks(state),
   };
 };
 

@@ -4,6 +4,7 @@ const SET_WEEKLY_FORECAST_DATA = "SET_WEEKLY_FORECAST_DATA";
 const SET_CURRENT_DAY = "SET_CURRENT_DAY";
 const SET_CURRENT_TIME = "SET_CURRENT_TIME";
 const SET_CURRENT_FORECAST_DATA = "SET_CURRENT_FORECAST_DATA";
+const SET_TIME_MARKS = "SET_TIME_MARKS";
 const SET_CITY = "SET_CITY";
 const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
 const SET_RANDOM_QUOTE = "SET_RANDOM_QUOTE";
@@ -11,6 +12,7 @@ const SET_RANDOM_QUOTE = "SET_RANDOM_QUOTE";
 let initialState = {
   weeklyForecastData: null,
   currentForecastData: null,
+  timeMarks: null,
   dayIndex: 0,
   timeIndex: 0,
   city: null,
@@ -29,6 +31,17 @@ const forecastReducer = (state = initialState, action) => {
         dayIndex: action.dayIndex,
       };
 
+    case SET_TIME_MARKS:
+      return {
+        ...state,
+        timeMarks: Object.assign(
+          {},
+          state.weeklyForecastData.map((day) =>
+            day.data.map((time) => time.time)
+          )[state.dayIndex]
+        ),
+      };
+
     case SET_CURRENT_TIME:
       return {
         ...state,
@@ -39,7 +52,7 @@ const forecastReducer = (state = initialState, action) => {
       return {
         ...state,
         currentForecastData:
-          state.weeklyForecastData[state.dayIndex].data[(state.timeIndex)],
+          state.weeklyForecastData[state.dayIndex].data[state.timeIndex],
       };
 
     case SET_CITY:
@@ -74,6 +87,7 @@ export const setCurrentTime = (timeIndex = 0) => ({
 export const setCurrentForecastData = () => ({
   type: SET_CURRENT_FORECAST_DATA,
 });
+export const setTimeMarks = () => ({ type: SET_TIME_MARKS });
 export const setCity = (city) => ({ type: SET_CITY, city });
 export const setErrorMessage = (errorMessage) => ({
   type: SET_ERROR_MESSAGE,
@@ -220,12 +234,13 @@ export const getForecastDataByGeoCoordinates =
 
 export const setCurrentDayData = (dayIndex) => (dispatch) => {
   dispatch(setCurrentDay(dayIndex));
+  dispatch(setCurrentTime(0))
+  dispatch(setTimeMarks());
   dispatch(setCurrentForecastData());
 };
-//todo fix bug with range slider
+
 export const setCurrentTimeData = (timeIndex) => (dispatch) => {
-  let parsedTimeIndex = parseInt(timeIndex);
-  dispatch(setCurrentTime(parsedTimeIndex));
+  dispatch(setCurrentTime(timeIndex));
   dispatch(setCurrentForecastData());
 };
 

@@ -22,6 +22,6 @@ export const getWeeklyForecastData = (state) => {
   return state.forecast.weeklyForecastData;
 };
 
-export const getTimeIndex = (state) => {
-  return state.forecast.timeIndex;
+export const getTimeMarks = (state) => {
+  return state.forecast.timeMarks;
 };
