@@ -25,3 +25,7 @@ export const getWeeklyForecastData = (state) => {
 export const getTimeMarks = (state) => {
   return state.forecast.timeMarks;
 };
+
+export const getErrorMessage = (state) => {
+  return state.app.errorMessage;
+};

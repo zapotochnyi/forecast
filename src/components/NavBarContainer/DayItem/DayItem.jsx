@@ -9,12 +9,10 @@ const DayItem = ({
   activeClass,
   setActiveClass,
   dayItemClasses,
-  getRandomQuote,
 }) => {
   const handleClick = (e) => {
     setCurrentDayData(index);
     setActiveClass(index);
-    getRandomQuote();
   };
 
   return (

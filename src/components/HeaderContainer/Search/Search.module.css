@@ -1,0 +1,15 @@
+.search_wrapper {
+    position: relative;
+    z-index: 100;
+}
+
+.form {
+    display: flex;
+}
+
+.input {
+
+}
+.button {
+
+}

@@ -1,4 +1,5 @@
 import { forecastAPI, quotesAPI } from "../api/api";
+import { setErrorMessage } from "./appReducer";
 
 const SET_WEEKLY_FORECAST_DATA = "SET_WEEKLY_FORECAST_DATA";
 const SET_CURRENT_DAY = "SET_CURRENT_DAY";
@@ -6,7 +7,6 @@ const SET_CURRENT_TIME = "SET_CURRENT_TIME";
 const SET_CURRENT_FORECAST_DATA = "SET_CURRENT_FORECAST_DATA";
 const SET_TIME_MARKS = "SET_TIME_MARKS";
 const SET_CITY = "SET_CITY";
-const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
 const SET_RANDOM_QUOTE = "SET_RANDOM_QUOTE";
 
 let initialState = {
@@ -16,7 +16,6 @@ let initialState = {
   dayIndex: 0,
   timeIndex: 0,
   city: null,
-  errorMessage: null,
   randomQuote: null,
 };
 
@@ -61,9 +60,6 @@ const forecastReducer = (state = initialState, action) => {
         city: action.city,
       };
 
-    case SET_ERROR_MESSAGE:
-      return { ...state, errorMessage: action.errorMessage };
-
     case SET_RANDOM_QUOTE:
       return { ...state, randomQuote: action.quote };
 
@@ -89,10 +85,7 @@ export const setCurrentForecastData = () => ({
 });
 export const setTimeMarks = () => ({ type: SET_TIME_MARKS });
 export const setCity = (city) => ({ type: SET_CITY, city });
-export const setErrorMessage = (errorMessage) => ({
-  type: SET_ERROR_MESSAGE,
-  errorMessage,
-});
+
 export const setRandomQuote = (quote) => ({
   type: SET_RANDOM_QUOTE,
   quote,
@@ -219,24 +212,47 @@ const processForecastData = (forecastData) => {
 
 export const getForecastDataByGeoCoordinates =
   (lat, lon) => async (dispatch) => {
-    const response = await forecastAPI.forWeekByGeoCoordinates(lat, lon);
+    try {
+      const response = await forecastAPI.forWeekByGeoCoordinates(lat, lon);
+      if (response.data.cod === "200") {
+        dispatch(setCity(response.data.city.name));
+        dispatch(
+          setWeeklyForecastData(processForecastData(response.data.list))
+        );
+        dispatch(setCurrentDayData(0));
+      }
+      return response;
+    } catch (err) {
+      dispatch(
+        setErrorMessage({
+          message:
+            "Something went wrong. Perhaps you did not allow access to the geolocation",
+          err,
+        })
+      );
+    }
+  };
 
-    if (response.data.cod === "200") {
+export const getForecastDataByCityName = (city) => async (dispatch) => {
+  try {
+    const response = await forecastAPI.forWeekByCityName(city);
+    if (response.status === 200) {
       dispatch(setCity(response.data.city.name));
       dispatch(setWeeklyForecastData(processForecastData(response.data.list)));
       dispatch(setCurrentDayData(0));
-    } else {
-      dispatch(setErrorMessage(response.data.cod + "Something was wrong"));
+      dispatch(setErrorMessage(null));
     }
-
-    return response;
-  };
+  } catch (err) {
+    dispatch(setErrorMessage({ message: "City not found", err }));
+  }
+};
 
 export const setCurrentDayData = (dayIndex) => (dispatch) => {
   dispatch(setCurrentDay(dayIndex));
-  dispatch(setCurrentTime(0))
+  dispatch(setCurrentTime(0));
   dispatch(setTimeMarks());
   dispatch(setCurrentForecastData());
+  dispatch(getRandomQuote());
 };
 
 export const setCurrentTimeData = (timeIndex) => (dispatch) => {

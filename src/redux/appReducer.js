@@ -1,13 +1,14 @@
 import {
   getForecastDataByGeoCoordinates,
   getRandomQuote,
-  getWeeklyForecastData,
 } from "./forecastReducer";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
+const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
 
 let initialState = {
   initialized: false,
+  errorMessage: null,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -18,12 +19,19 @@ const appReducer = (state = initialState, action) => {
         initialized: true,
       };
 
+    case SET_ERROR_MESSAGE:
+      return { ...state, errorMessage: action.errorMessage };
+
     default:
       return state;
   }
 };
 
-export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
+export const initializedSuccessful = () => ({ type: INITIALIZED_SUCCESS });
+export const setErrorMessage = (errorMessage) => ({
+  type: SET_ERROR_MESSAGE,
+  errorMessage,
+});
 
 export const initializeApp = (latitude, longitude) => (dispatch) => {
   let forecastDataPromise = dispatch(
@@ -32,7 +40,7 @@ export const initializeApp = (latitude, longitude) => (dispatch) => {
   let randomQuotePromise = dispatch(getRandomQuote());
 
   Promise.all([forecastDataPromise, randomQuotePromise]).then(() => {
-    dispatch(initializedSuccess());
+    dispatch(initializedSuccessful());
   });
 };
 

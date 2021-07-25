@@ -14,7 +14,6 @@ import { setCurrentTimeData } from "../../redux/forecastReducer";
 const ForecastContainer = ({
   currentForecastData: { weather, temp, feels_like, pressure, humidity, wind },
   randomQuote,
-  timeIndex,
   timeMarks,
   setCurrentTimeData,
 }) => {

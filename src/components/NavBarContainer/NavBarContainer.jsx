@@ -5,7 +5,6 @@ import { getWeeklyForecastData } from "../../utils/selectors.js";
 import DayItem from "./DayItem/DayItem";
 import { setCurrentDayData } from "../../redux/forecastReducer";
 import classNames from "classnames";
-import { getRandomQuote } from "../../redux/forecastReducer";
 
 const NavBarContainer = ({ week, setCurrentDayData, getRandomQuote }) => {
   let [activeClass, setActiveClass] = useState(0);
@@ -50,6 +49,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setCurrentDayData, getRandomQuote })(
-  NavBarContainer
-);
+export default connect(mapStateToProps, { setCurrentDayData })(NavBarContainer);
