@@ -2,11 +2,13 @@ import React from "react";
 import s from "./TimeSetter.module.css";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { useState } from "react";
 
-const TimeSetter = ({ setCurrentTimeData, timeMarks }) => {
-  //todo flux for slider
+const TimeSetter = ({ setCurrentTimeData, timeMarks, timeIndex }) => {
+  let [timeIndexLocal, setTimeIndexLocal] = useState(timeIndex);
 
   const onTimeChange = (value) => {
+    setTimeIndexLocal(value);
     setCurrentTimeData(value);
   };
 
@@ -18,7 +20,7 @@ const TimeSetter = ({ setCurrentTimeData, timeMarks }) => {
         max={Object.keys(timeMarks).length - 1}
         marks={timeMarks}
         step={null}
-        defaultValue={0}
+        value={timeIndexLocal}
       />
     </div>
   );

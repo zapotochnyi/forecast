@@ -1,15 +1,41 @@
 .search_wrapper {
-    position: relative;
-    z-index: 100;
+  position: relative;
+  z-index: 1;
+  padding-right: 50px;
+  display: flex;
+}
+
+.loader {
+  width: 25px;
+  margin-right: 5px;
+  margin-bottom: 9px;
 }
 
 .form {
-    display: flex;
+  padding-top: 30px;
+  display: flex;
 }
 
 .input {
-
+  border: none;
+  padding: 5px 10px;
+  font-size: medium;
+  outline: none;
+  background: rgb(255, 255, 255);
+  margin-right: 5px;
+  height: 30px;
 }
-.button {
 
+.button {
+  border: none;
+  border-radius: 5px;
+  background: rgb(30, 25, 110);
+  color: whitesmoke;
+  width: 55px;
+  cursor: pointer;
+  height: 30px;
+}
+
+.error_message {
+  padding-left: 10px;
 }

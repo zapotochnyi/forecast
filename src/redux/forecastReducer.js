@@ -242,8 +242,9 @@ export const getForecastDataByCityName = (city) => async (dispatch) => {
       dispatch(setCurrentDayData(0));
       dispatch(setErrorMessage(null));
     }
+    return response;
   } catch (err) {
-    dispatch(setErrorMessage({ message: "City not found", err }));
+    dispatch(setErrorMessage({ message: "Location not found", err }));
   }
 };
 

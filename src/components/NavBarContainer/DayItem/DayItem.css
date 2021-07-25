@@ -1,20 +1,19 @@
 .day_item {
-    font-size: large;
-    padding-bottom: 20px;
-    height: 55px;
-    position: relative;
-    cursor: pointer;
+  font-size: large;
+  padding-bottom: 20px;
+  height: 55px;
+  position: relative;
+  cursor: pointer;
 }
 
 .day {
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
-
 
 .active {
   background-color: rgb(30, 25, 110);
@@ -22,19 +21,21 @@
 }
 
 .not_active_support_one {
-    background-color: whitesmoke;
-    border-bottom-right-radius: 25px;
+  background-color: whitesmoke;
+  border-bottom-right-radius: 25px;
 }
 
 .not_active_support_two {
-    background-color: whitesmoke;
-    border-top-right-radius: 25px;
-
+  background-color: whitesmoke;
+  border-top-right-radius: 25px;
 }
 
 .not_active {
-    background-color: whitesmoke;
+  background-color: whitesmoke;
 }
 
-
-
+.support_lower {
+  height: 100px;
+  background-color: whitesmoke;
+  border-top-right-radius: 25px;
+}

@@ -5,9 +5,14 @@ import { getWeeklyForecastData } from "../../utils/selectors.js";
 import DayItem from "./DayItem/DayItem";
 import { setCurrentDayData } from "../../redux/forecastReducer";
 import classNames from "classnames";
+import { useEffect } from "react";
 
 const NavBarContainer = ({ week, setCurrentDayData, getRandomQuote }) => {
   let [activeClass, setActiveClass] = useState(0);
+
+  useEffect(() => {
+    setActiveClass(0);
+  }, [week]);
 
   let dayItemClasses = (index, activeClass) => {
     return classNames({
@@ -20,7 +25,6 @@ const NavBarContainer = ({ week, setCurrentDayData, getRandomQuote }) => {
       not_active: !(index === activeClass),
     });
   };
-  //todo empty containers for UI
   return (
     <div className={s.navbar_wrap}>
       {week.map((dayItem, index) => {

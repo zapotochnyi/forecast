@@ -8,7 +8,7 @@
 .city_name {
   position: relative;
   left: 17%;
-  width: 100px;
+  width: 200px;
 }
 
 .city_name :first-child {

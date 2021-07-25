@@ -29,3 +29,7 @@ export const getTimeMarks = (state) => {
 export const getErrorMessage = (state) => {
   return state.app.errorMessage;
 };
+
+export const getTimeIndex = (state) => {
+  return state.forecast.timeIndex;
+};
