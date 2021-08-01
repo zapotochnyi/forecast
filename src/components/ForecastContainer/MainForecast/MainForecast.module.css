@@ -1,34 +1,71 @@
 .main_forecast_wrap {
-    display: flex;
-    justify-content: space-between;
-    height: 300px;
+  display: flex;
+  justify-content: space-between;
+  height: 40vh;
 }
 
 .temp_description_wrap {
-    padding-left: 50px;
-    color: whitesmoke;
+  padding-top: 2%;
+  padding-left: 6%;
+  color: whitesmoke;
 }
 
 .temp {
-    font-size: 80px;
-    letter-spacing: 0.01em;
+  font-size: 7em;
+  letter-spacing: 0.01em;
 }
 
 .description {
-    display: flex;
-    margin-right: 5px;
-    font-size: 18px;
+  display: flex;
+  width: 100%;
+  margin-right: 1em;
+  font-size: 1.4em;
+  white-space: nowrap;
 }
 
 .description :first-child {
-    margin-right: 5px;
+  margin-right: 0.5em;
 }
 
 .icon_wrap {
-    position: relative;
-    bottom: 100px;
+  width: 200px;
+  padding: 25px 100px 0 0;
 }
 
 .icon_wrap img {
-    width: 400px;
+  width: 100%;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .main_forecast_wrap {
+    margin: 40px 0 100px 0;
+    height: 200px;
+  }
+
+  .temp_description_wrap {
+    padding: 0;
+    height: 100px;
+    flex-direction: column;
+  }
+
+  .temp {
+    font-size: 72px;
+  }
+  .description {
+    font-size: 14px;
+    overflow: hidden;
+    white-space: normal;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .icon_wrap {
+    padding: 0 0 0 50px;
+    height: 100px;
+  }
+
+  .icon_wrap img {
+    width: 100px;
+  }
 }

@@ -1,10 +1,11 @@
 .day_item {
   font-size: large;
   padding-bottom: 20px;
-  height: 55px;
+  height: 10vh;
   position: relative;
   cursor: pointer;
 }
+
 
 .day {
   position: absolute;
@@ -16,7 +17,7 @@
 }
 
 .active {
-  background-color: rgb(30, 25, 110);
+  background-color: #4200FF;
   color: whitesmoke;
 }
 
@@ -38,4 +39,17 @@
   height: 100px;
   background-color: whitesmoke;
   border-top-right-radius: 25px;
+}
+
+@media (max-width: 767px) {
+  .day_item {
+    height: 107px
+  }
+  
+  .not_active_support_one {
+    border-bottom-right-radius: 0;
+  }
+  .not_active_support_two {
+    border-top-right-radius: 0;
+  }
 }

@@ -5,6 +5,7 @@ import {
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
 const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
+const BURGER_IS_ACTIVE = "BURGER_IS_ACTIVE";
 
 let initialState = {
   initialized: false,
@@ -17,10 +18,17 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         initialized: true,
+        burgerIsActive: false,
       };
 
     case SET_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage };
+
+    case BURGER_IS_ACTIVE:
+      return {
+        ...state,
+        burgerIsActive: action.isActive,
+      };
 
     default:
       return state;
@@ -31,6 +39,10 @@ export const initializedSuccessful = () => ({ type: INITIALIZED_SUCCESS });
 export const setErrorMessage = (errorMessage) => ({
   type: SET_ERROR_MESSAGE,
   errorMessage,
+});
+export const setBurgerIsActive = (isActive) => ({
+  type: BURGER_IS_ACTIVE,
+  isActive,
 });
 
 export const initializeApp = (latitude, longitude) => (dispatch) => {

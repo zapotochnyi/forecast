@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import "./DayItem.css";
 
 const DayItem = ({
@@ -7,6 +6,7 @@ const DayItem = ({
   date,
   index,
   setCurrentDayData,
+  setBurgerIsActive,
   activeClass,
   setActiveClass,
   dayItemClasses,
@@ -14,6 +14,7 @@ const DayItem = ({
   const handleClick = (e) => {
     setCurrentDayData(index);
     setActiveClass(index);
+    setBurgerIsActive(false);
   };
 
   return (

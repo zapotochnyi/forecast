@@ -1,17 +1,12 @@
 import React from "react";
 import s from "./DetailedForecast.module.css";
 //icons
-import windIcon from "../../../assets/wind.svg";
-import pressureIcon from "../../../assets/pressure.svg";
-import humidityIcon from "../../../assets/humidity.svg";
-import quoteIcon from "../../../assets/left-quote.svg";
+import windIcon from "../../../assets/detailed-forecast/wind.svg";
+import pressureIcon from "../../../assets/detailed-forecast/pressure.svg";
+import humidityIcon from "../../../assets/detailed-forecast/humidity.svg"
+import Quote from "./Quote/Quote";
 
-const DetailedForecast = ({
-  pressure,
-  humidity,
-  wind,
-  randomQuote,
-}) => {
+const DetailedForecast = ({ pressure, humidity, wind, randomQuote }) => {
   return (
     <div className={s.detailed_forecast_wrap}>
       <div className={s.info_wrap}>
@@ -35,11 +30,7 @@ const DetailedForecast = ({
         </div>
       </div>
 
-      <div className={s.quotes_wrap}>
-        <img src={quoteIcon} alt="" />
-        <div>{randomQuote.text}</div>
-        <div>{randomQuote.author}</div>
-      </div>
+      <Quote randomQuote={randomQuote} />
     </div>
   );
 };

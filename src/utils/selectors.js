@@ -33,3 +33,7 @@ export const getErrorMessage = (state) => {
 export const getTimeIndex = (state) => {
   return state.forecast.timeIndex;
 };
+
+export const getBurgerIsActive = (state) => {
+  return state.app.burgerIsActive;
+};

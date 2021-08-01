@@ -6,11 +6,13 @@ import {
   getRandomQuoteData,
   getTimeMarks,
   getTimeIndex,
+  getBurgerIsActive,
 } from "../../utils/selectors";
 import DetailedForecast from "./DetailedForecast/DetailedForecast";
 import MainForecast from "./MainForecast/MainForecast";
 import TimeSetter from "./TimeSetter/TimeSetter";
 import { setCurrentTimeData } from "../../redux/forecastReducer";
+import classNames from "classnames";
 
 const ForecastContainer = ({
   currentForecastData: { weather, temp, feels_like, pressure, humidity, wind },
@@ -18,9 +20,14 @@ const ForecastContainer = ({
   timeIndex,
   timeMarks,
   setCurrentTimeData,
+  burgerIsActive,
 }) => {
   return (
-    <div className={s.forecast_wrap}>
+    <div
+      className={classNames(s.forecast_wrap, {
+        [s.lock]: burgerIsActive,
+      })}
+    >
       <MainForecast weather={weather} temp={temp} feels_like={feels_like} />
       <DetailedForecast
         pressure={pressure}
@@ -43,6 +50,7 @@ const mapStateToProps = (state) => {
     randomQuote: getRandomQuoteData(state),
     timeMarks: getTimeMarks(state),
     timeIndex: getTimeIndex(state),
+    burgerIsActive: getBurgerIsActive(state),
   };
 };
 

@@ -7,8 +7,8 @@
 
 .city_name {
   position: relative;
+  width: 10%;
   left: 17%;
-  width: 200px;
 }
 
 .city_name :first-child {
@@ -22,4 +22,108 @@
   position: absolute;
   top: 60%;
   font-size: small;
+}
+
+.burger {
+  display: none;
+}
+
+.search_icon {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .header_wrap {
+    position: fixed;
+    background-color: whitesmoke;
+    width: 100%;
+    height: 50px;
+    z-index: 2;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .search_icon {
+    display: block;
+    width: 30px;
+    z-index: 3;
+    transition: all 0.5s ease;
+  }
+  .search_icon img {
+    width: 100%;
+  }
+  .icon_hidden {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .city_name {
+    width: 100px;
+    left: 0px;
+    bottom: 3px;
+    transition: all 0.5s ease;
+  }
+  .city_name :first-child {
+    font-size: large;
+    text-align: center;
+    width: 100%;
+  }
+  .city_name :last-child {
+    font-size: small;
+    text-align: center;
+    width: 100%;
+  }
+  .city_hidden {
+    opacity: 0;
+  }
+
+  .burger {
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    left: 0;
+  }
+
+  .burger span {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 100);
+    left: 0;
+    width: 100%;
+    height: 3px;
+    top: 15px;
+    transition: background-color 0s 0.3s;
+  }
+  .burger span::before,
+  .burger span::after {
+    content: "";
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    left: 0;
+    transition-duration: 0.3s, 0.3s;
+    transition-delay: 0.3s, 0s;
+  }
+  .burger span::before {
+    top: -10px;
+    transition-property: top, transform;
+  }
+  .burger span::after {
+    bottom: -10px;
+    transition-property: bottom, transform;
+  }
+
+  .burger.active_burger span {
+    background-color: whitesmoke;
+  }
+  .burger.active_burger span::before {
+    top: 0;
+    transform: rotate(45deg);
+    transition-delay: 0s, 0.3s;
+  }
+  .burger.active_burger span::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+    transition-delay: 0s, 0.3s;
+  }
 }

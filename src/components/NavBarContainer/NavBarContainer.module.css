@@ -1,6 +1,23 @@
 .navbar_wrap {
   grid-area: n;
-  box-sizing: border-box;
-  background-color: rgb(30, 25, 110);
+  background-color: #4200FF;
   height: min-content;
+}
+
+@media (max-width: 767px) {
+  .navbar_wrap {
+    position: fixed;
+    display: block;
+    padding-top: 50px;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease;
+    overflow: scroll;
+    z-index: 1;
+  }
+  .active {
+    top: 0;
+  }
 }

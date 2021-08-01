@@ -1,18 +1,18 @@
 .search_wrapper {
   position: relative;
   z-index: 1;
-  padding-right: 50px;
+  padding-right: 5%;
   display: flex;
 }
 
 .loader {
   width: 25px;
-  margin-right: 5px;
-  margin-bottom: 9px;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
 }
 
 .form {
-  padding-top: 30px;
+  padding-top: 12%;
   display: flex;
 }
 
@@ -29,13 +29,37 @@
 .button {
   border: none;
   border-radius: 5px;
-  background: rgb(30, 25, 110);
+  background: none;
   color: whitesmoke;
-  width: 55px;
+  width: 40px;
   cursor: pointer;
   height: 30px;
+  border: none;
 }
 
-.error_message {
-  padding-left: 10px;
+.button img {
+  width: 30px;
+}
+
+@media (max-width: 767px) {
+  .search_wrapper {
+    position: fixed;
+    top: -34px;
+    right: -110%;
+    width: 100%;
+    transition: all 0.5s ease;
+    z-index: 0;
+  }
+
+  .active {
+    right: -135px;
+  }
+
+  .input {
+    width: 200px;
+  }
+
+  .loader {
+    display: none;
+  }
 }
