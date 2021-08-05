@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/forecast/static/css/main.c21a8533.chunk.css",
-    "main.js": "/forecast/static/js/main.b3ba9fe4.chunk.js",
-    "main.js.map": "/forecast/static/js/main.b3ba9fe4.chunk.js.map",
+    "main.css": "/forecast/static/css/main.24ca1623.chunk.css",
+    "main.js": "/forecast/static/js/main.f7b30dad.chunk.js",
+    "main.js.map": "/forecast/static/js/main.f7b30dad.chunk.js.map",
     "runtime-main.js": "/forecast/static/js/runtime-main.54fac9ed.js",
     "runtime-main.js.map": "/forecast/static/js/runtime-main.54fac9ed.js.map",
     "static/css/2.4a35ef0a.chunk.css": "/forecast/static/css/2.4a35ef0a.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.6be3f45b.chunk.js.map": "/forecast/static/js/2.6be3f45b.chunk.js.map",
     "index.html": "/forecast/index.html",
     "static/css/2.4a35ef0a.chunk.css.map": "/forecast/static/css/2.4a35ef0a.chunk.css.map",
-    "static/css/main.c21a8533.chunk.css.map": "/forecast/static/css/main.c21a8533.chunk.css.map",
+    "static/css/main.24ca1623.chunk.css.map": "/forecast/static/css/main.24ca1623.chunk.css.map",
     "static/js/2.6be3f45b.chunk.js.LICENSE.txt": "/forecast/static/js/2.6be3f45b.chunk.js.LICENSE.txt",
     "static/media/cloudy.0834d4ae.svg": "/forecast/static/media/cloudy.0834d4ae.svg",
     "static/media/drizzle.767428d2.svg": "/forecast/static/media/drizzle.767428d2.svg",
@@ -29,7 +29,7 @@
     "static/js/runtime-main.54fac9ed.js",
     "static/css/2.4a35ef0a.chunk.css",
     "static/js/2.6be3f45b.chunk.js",
-    "static/css/main.c21a8533.chunk.css",
-    "static/js/main.b3ba9fe4.chunk.js"
+    "static/css/main.24ca1623.chunk.css",
+    "static/js/main.f7b30dad.chunk.js"
   ]
 }
