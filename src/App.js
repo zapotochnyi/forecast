@@ -7,7 +7,6 @@ import Loader from "./components/common/Loader";
 import { getErrorMessage, getInitialized } from "./utils/selectors";
 import { initializeApp } from "./redux/appReducer";
 import ForecastContainer from "./components/ForecastContainer/ForecastContainer";
-import { appAnimation } from "./utils/animation";
 
 const App = ({ initialized, initializeApp, errorMessage }) => {
   useEffect(() => {

@@ -32,7 +32,7 @@
   display: none;
 }
 
-@media  (max-width: 823px) {
+@media (max-width: 823px) {
   .header_wrap {
     position: fixed;
     background-color: whitesmoke;
@@ -86,12 +86,12 @@
 
   .burger span {
     position: absolute;
-    background-color: rgba(0, 0, 0, 100);
+    background: rgba(0, 0, 0, 100);
     left: 0;
     width: 100%;
     height: 3px;
     top: 15px;
-    transition: background-color 0s 0.3s;
+    transition: background 0s 0.3s;
   }
   .burger span::before,
   .burger span::after {
@@ -114,7 +114,7 @@
   }
 
   .burger.active_burger span {
-    background-color: whitesmoke;
+    background: whitesmoke;
   }
   .burger.active_burger span::before {
     top: 0;

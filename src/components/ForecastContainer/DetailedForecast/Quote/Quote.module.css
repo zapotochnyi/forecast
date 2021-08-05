@@ -10,7 +10,7 @@
 .quotes_wrap div {
   color: whitesmoke;
   font-style: oblique;
-  opacity: 85%;
+  opacity: .85;
   padding-left: 5%;
 }
 
