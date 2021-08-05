@@ -1,12 +1,18 @@
 .time_setter_wrap {
-  padding: 8vh 7vh;
+  padding: 8vh 100px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 823px) {
   .time_setter_wrap {
     position: relative;
-    bottom: 240px;
+    bottom: 25%;
     padding-left: 10px;
     padding-right: 20px;
+  }
+}
+
+@media (max-height: 411px) {
+  .time_setter_wrap {
+    bottom: 125%;
   }
 }

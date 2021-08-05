@@ -9,16 +9,20 @@ const DayItem = ({
   setBurgerIsActive,
   activeClass,
   setActiveClass,
+  setOnMouseClass,
   dayItemClasses,
 }) => {
-  const handleClick = (e) => {
-    setCurrentDayData(index);
-    setActiveClass(index);
-    setBurgerIsActive(false);
-  };
-
   return (
-    <div onClick={handleClick} className={dayItemClasses(index, activeClass)}>
+    <div
+      onClick={() => {
+        setCurrentDayData(index);
+        setActiveClass(index);
+        setBurgerIsActive(false);
+      }}
+      onMouseOver={() => setOnMouseClass(index)}
+      onMouseOut={() => setOnMouseClass(null)}
+      className={dayItemClasses(index, activeClass)}
+    >
       <div className={"day"}>
         <div>{day}</div>
         <div>{date}</div>

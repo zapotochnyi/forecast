@@ -1,5 +1,5 @@
 import { forecastAPI, quotesAPI } from "../api/api";
-import { setErrorMessage } from "./appReducer";
+import { setErrorMessage, setSearchIsActive } from "./appReducer";
 
 const SET_WEEKLY_FORECAST_DATA = "SET_WEEKLY_FORECAST_DATA";
 const SET_CURRENT_DAY = "SET_CURRENT_DAY";
@@ -241,6 +241,7 @@ export const getForecastDataByCityName = (city) => async (dispatch) => {
       dispatch(setWeeklyForecastData(processForecastData(response.data.list)));
       dispatch(setCurrentDayData(0));
       dispatch(setErrorMessage(null));
+      dispatch(setSearchIsActive(false));
     }
     return response;
   } catch (err) {

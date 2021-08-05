@@ -4,8 +4,8 @@
   height: 10vh;
   position: relative;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
-
 
 .day {
   position: absolute;
@@ -16,8 +16,13 @@
   transform: translate(-50%, -50%);
 }
 
+.on_mouse {
+  background-color: #4200ff;
+  opacity: 80%;
+}
+
 .active {
-  background-color: #4200FF;
+  background-color: #4200ff;
   color: whitesmoke;
 }
 
@@ -41,15 +46,24 @@
   border-top-right-radius: 25px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 823px) {
   .day_item {
-    height: 107px
+    height: 90px;
+    padding: 0;
+    overflow: scroll;
+    transition: all 0.1s ease-in;
   }
-  
+
   .not_active_support_one {
     border-bottom-right-radius: 0;
   }
   .not_active_support_two {
     border-top-right-radius: 0;
+  }
+}
+
+@media (max-height: 411px) {
+  .day_item {
+    height: 55px;
   }
 }

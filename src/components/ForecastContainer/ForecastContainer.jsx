@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import s from "./ForecastContainer.module.css";
 import { connect } from "react-redux";
 import {
@@ -13,6 +13,7 @@ import MainForecast from "./MainForecast/MainForecast";
 import TimeSetter from "./TimeSetter/TimeSetter";
 import { setCurrentTimeData } from "../../redux/forecastReducer";
 import classNames from "classnames";
+import { appAnimation } from "../../utils/animation";
 
 const ForecastContainer = ({
   currentForecastData: { weather, temp, feels_like, pressure, humidity, wind },
@@ -22,6 +23,10 @@ const ForecastContainer = ({
   setCurrentTimeData,
   burgerIsActive,
 }) => {
+  useEffect(() => {
+    appAnimation();
+  },[weather]);
+
   return (
     <div
       className={classNames(s.forecast_wrap, {

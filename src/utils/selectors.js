@@ -37,3 +37,7 @@ export const getTimeIndex = (state) => {
 export const getBurgerIsActive = (state) => {
   return state.app.burgerIsActive;
 };
+
+export const getSearchIsActive = (state) => {
+  return state.app.searchIsActive;
+};

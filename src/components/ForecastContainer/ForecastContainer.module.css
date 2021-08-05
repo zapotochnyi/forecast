@@ -1,10 +1,10 @@
 .forecast_wrap {
   grid-area: p;
-  background-color: #4200FF;
+  background-color: #4200ff;
   height: 100%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 823px) {
   .forecast_wrap {
     padding: 50px 30px 0 30px;
     display: flex;
@@ -15,5 +15,11 @@
 
   .lock {
     overflow: hidden;
+  }
+}
+
+@media (max-height: 411px) {
+  .forecast_wrap {
+    padding: 50px 70px 0 70px;
   }
 }

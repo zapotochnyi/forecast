@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { getCityName, getDate, getBurgerIsActive } from "../../utils/selectors";
+import {
+  getCityName,
+  getDate,
+  getBurgerIsActive,
+  getSearchIsActive,
+} from "../../utils/selectors";
 import s from "./HeaderContainer.module.css";
 import Search from "./Search/Search";
 import { getForecastDataByCityName } from "../../redux/forecastReducer";
-import { setBurgerIsActive } from "../../redux/appReducer";
+import { setBurgerIsActive, setSearchIsActive } from "../../redux/appReducer";
 import classNames from "classnames";
 import searchIcon from "../../assets/search-icon.svg";
 
@@ -15,24 +20,15 @@ const HeaderContainer = ({
   errorMessage,
   burgerIsActive,
   setBurgerIsActive,
+  searchIsActive,
+  setSearchIsActive,
 }) => {
-  let [searchIsActive, setSearchIsActive] = useState(false);
-
   let toggleBurger = () => {
     if (!burgerIsActive) {
       setBurgerIsActive(true);
     }
     if (burgerIsActive) {
       setBurgerIsActive(false);
-    }
-  };
-
-  let toggleSearch = () => {
-    if (!searchIsActive) {
-      setSearchIsActive(true);
-    }
-    if (searchIsActive) {
-      setSearchIsActive(false);
     }
   };
 
@@ -57,7 +53,7 @@ const HeaderContainer = ({
       </div>
 
       <div
-        onClick={toggleSearch}
+        onClick={() => setSearchIsActive(true)}
         className={classNames(s.search_icon, {
           [s.icon_hidden]: searchIsActive,
         })}
@@ -80,10 +76,12 @@ const mapStateToProps = (state) => {
     cityName: getCityName(state),
     date: getDate(state),
     burgerIsActive: getBurgerIsActive(state),
+    searchIsActive: getSearchIsActive(state),
   };
 };
 
 export default connect(mapStateToProps, {
   getForecastDataByCityName,
   setBurgerIsActive,
+  setSearchIsActive,
 })(HeaderContainer);

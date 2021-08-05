@@ -19,6 +19,7 @@ const NavBarContainer = ({
   setBurgerIsActive,
 }) => {
   let [activeClass, setActiveClass] = useState(0);
+  let [onMouseClass, setOnMouseClass] = useState(null);
 
   useEffect(() => {
     setActiveClass(0);
@@ -27,6 +28,7 @@ const NavBarContainer = ({
   let dayItemClasses = (index, activeClass) => {
     return classNames({
       day_item: true,
+      on_mouse: index === onMouseClass,
       active: index === activeClass,
       not_active_support_one:
         !(index === activeClass) && index === activeClass - 1,
@@ -48,6 +50,7 @@ const NavBarContainer = ({
             setCurrentDayData={setCurrentDayData}
             activeClass={activeClass}
             setActiveClass={setActiveClass}
+            setOnMouseClass={setOnMouseClass}
             dayItemClasses={dayItemClasses}
             getRandomQuote={getRandomQuote}
             setBurgerIsActive={setBurgerIsActive}

@@ -6,6 +6,7 @@ import {
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
 const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
 const BURGER_IS_ACTIVE = "BURGER_IS_ACTIVE";
+const SEARCH_IS_ACTIVE = "SEARCH_IS_ACTIVE";
 
 let initialState = {
   initialized: false,
@@ -19,6 +20,7 @@ const appReducer = (state = initialState, action) => {
         ...state,
         initialized: true,
         burgerIsActive: false,
+        searchIsActive: false,
       };
 
     case SET_ERROR_MESSAGE:
@@ -28,6 +30,12 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         burgerIsActive: action.isActive,
+      };
+
+    case SEARCH_IS_ACTIVE:
+      return {
+        ...state,
+        searchIsActive: action.isActiveSearch,
       };
 
     default:
@@ -43,6 +51,10 @@ export const setErrorMessage = (errorMessage) => ({
 export const setBurgerIsActive = (isActive) => ({
   type: BURGER_IS_ACTIVE,
   isActive,
+});
+export const setSearchIsActive = (isActiveSearch) => ({
+  type: SEARCH_IS_ACTIVE,
+  isActiveSearch,
 });
 
 export const initializeApp = (latitude, longitude) => (dispatch) => {

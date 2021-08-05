@@ -6,9 +6,11 @@
 }
 
 .loader {
-  width: 25px;
-  margin-right: 1em;
-  margin-bottom: 0.5em;
+  position: absolute;
+  top: 36px;
+  left: 185px;
+  width: 20px;
+  height: 20px;
 }
 
 .form {
@@ -39,15 +41,16 @@
 
 .button img {
   width: 30px;
+  opacity: 65%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 823px) {
   .search_wrapper {
     position: fixed;
     top: -34px;
     right: -110%;
     width: 100%;
-    transition: all 0.5s ease;
+    transition: all 0.5s ease-in-out;
     z-index: 0;
   }
 
@@ -61,5 +64,15 @@
 
   .loader {
     display: none;
+  }
+}
+
+@media (max-height: 411px) {
+  .search_wrapper {
+    top: -87px;
+  }
+
+  .active {
+    right: -600px;
   }
 }

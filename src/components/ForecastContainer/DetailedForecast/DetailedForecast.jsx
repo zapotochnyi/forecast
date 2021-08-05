@@ -8,7 +8,7 @@ import Quote from "./Quote/Quote";
 
 const DetailedForecast = ({ pressure, humidity, wind, randomQuote }) => {
   return (
-    <div className={s.detailed_forecast_wrap}>
+    <div id="detailed_forecast" className={s.detailed_forecast_wrap}>
       <div className={s.info_wrap}>
         <div className={s.info_item}>
           <div className={s.icon}>

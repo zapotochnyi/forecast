@@ -35,9 +35,9 @@ body {
     max-width: 750px;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 823px) {
   .body {
-    background-color: #4200FF;
+    background-color: #4200ff;
   }
 
   .app-wrapper {

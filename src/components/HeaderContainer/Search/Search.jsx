@@ -15,13 +15,13 @@ const Search = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     let city = e.target.cityName.value.trim();
-    setIsLoader(true);
+    if (!e.target.cityName.value) {
+      setSearchIsActive(false);
+    }
     if (city) {
+      setIsLoader(true);
       getForecastDataByCityName(city).then(() => {
         setIsLoader(false);
-        if (errorMessage === null) {
-          setSearchIsActive();
-        }
       });
       e.target.cityName.value = "";
     }

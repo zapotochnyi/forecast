@@ -6,13 +6,18 @@
 
 .temp_description_wrap {
   padding-top: 2%;
-  padding-left: 6%;
+  padding-left: 100px;
   color: whitesmoke;
 }
 
 .temp {
   font-size: 7em;
   letter-spacing: 0.01em;
+  transition: all 0.5s ease-in-out;
+}
+.celsius {
+  opacity: 50%;
+  font-size: 90px;
 }
 
 .description {
@@ -24,12 +29,12 @@
 }
 
 .description :first-child {
-  margin-right: 0.5em;
+  margin-right: 5px;
 }
 
 .icon_wrap {
-  width: 200px;
-  padding: 25px 100px 0 0;
+  width: 275px;
+  padding: 20px 200px 0 0;
 }
 
 .icon_wrap img {
@@ -37,9 +42,9 @@
   display: block;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 823px) {
   .main_forecast_wrap {
-    margin: 40px 0 100px 0;
+    margin: 40px 0 60px 0;
     height: 200px;
   }
 
@@ -51,6 +56,9 @@
 
   .temp {
     font-size: 72px;
+  }
+  .celsius {
+    font-size: 55px;
   }
   .description {
     font-size: 14px;
@@ -67,5 +75,22 @@
 
   .icon_wrap img {
     width: 100px;
+  }
+}
+
+@media (max-height: 411px) {
+  .temp {
+    font-size: 100px;
+  }
+  .celsius {
+    font-size: 75px;
+  }
+  .description {
+    font-size: 16px;
+    flex-direction: row;
+  }
+
+  .icon_wrap img {
+    width: 200px;
   }
 }
