@@ -5,10 +5,10 @@ import NavBarContainer from "./components/NavBarContainer/NavBarContainer";
 import { connect } from "react-redux";
 import Loader from "./components/common/Loader";
 import { getErrorMessage, getInitialized } from "./utils/selectors";
-import { initializeApp } from "./redux/appReducer";
+import { initializeApp, setErrorMessage } from "./redux/appReducer";
 import ForecastContainer from "./components/ForecastContainer/ForecastContainer";
 
-const App = ({ initialized, initializeApp, errorMessage }) => {
+const App = ({ initialized, initializeApp, errorMessage, setErrorMessage }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((data) => {
       initializeApp(data.coords.latitude, data.coords.longitude);
@@ -18,7 +18,7 @@ const App = ({ initialized, initializeApp, errorMessage }) => {
   return (
     <>
       {!initialized ? (
-        <Loader />
+        <Loader errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
       ) : (
         <div className="app-wrapper">
           <HeaderContainer errorMessage={errorMessage} />
@@ -39,4 +39,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   initializeApp,
+  setErrorMessage,
 })(App);

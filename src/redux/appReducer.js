@@ -11,6 +11,8 @@ const SEARCH_IS_ACTIVE = "SEARCH_IS_ACTIVE";
 let initialState = {
   initialized: false,
   errorMessage: null,
+  burgerIsActive: false,
+  searchIsActive: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -19,8 +21,6 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         initialized: true,
-        burgerIsActive: false,
-        searchIsActive: false,
       };
 
     case SET_ERROR_MESSAGE:

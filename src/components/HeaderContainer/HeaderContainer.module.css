@@ -91,7 +91,7 @@
     width: 100%;
     height: 3px;
     top: 15px;
-    transition: background 0s 0.3s;
+    transition: all 0.3s ease-in-out;
   }
   .burger span::before,
   .burger span::after {
@@ -101,16 +101,13 @@
     width: 100%;
     height: 3px;
     left: 0;
-    transition-duration: 0.3s, 0.3s;
-    transition-delay: 0.3s, 0s;
+    transition: all 0.5s ease-in-out;
   }
   .burger span::before {
     top: -10px;
-    transition-property: top, transform;
   }
   .burger span::after {
     bottom: -10px;
-    transition-property: bottom, transform;
   }
 
   .burger.active_burger span {
@@ -119,11 +116,9 @@
   .burger.active_burger span::before {
     top: 0;
     transform: rotate(45deg);
-    transition-delay: 0s, 0.3s;
   }
   .burger.active_burger span::after {
     transform: rotate(-45deg);
     bottom: 0;
-    transition-delay: 0s, 0.3s;
   }
 }

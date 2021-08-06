@@ -226,7 +226,7 @@ export const getForecastDataByGeoCoordinates =
       dispatch(
         setErrorMessage({
           message:
-            "Something went wrong. Perhaps you did not allow access to the geolocation",
+            "Something went wrong. Perhaps, you did not allow access to the geolocation",
           err,
         })
       );
